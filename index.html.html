@@ -1,0 +1,812 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مخطط أهدافي</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --accent:#d989a0;
+  --accent-dark:#b96780;
+  --cream:#fff8f7;
+  --paper:#ffffff;
+  --ink:#59433d;
+  --muted:#9a8179;
+  --line:#eedde2;
+  --shadow:0 12px 35px rgba(100,60,60,.10);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;
+  background:
+    radial-gradient(circle at 10% 10%,#f5dce455,transparent 25%),
+    radial-gradient(circle at 90% 90%,#f5dce455,transparent 25%),
+    var(--cream);
+  color:var(--ink);font-family:"Amiri",serif;font-size:18px;
+}
+body.dark{
+  --cream:#211b1b;--paper:#302626;--ink:#f8e9e5;
+  --muted:#c8aaa2;--line:#493939;
+  --shadow:0 12px 35px rgba(0,0,0,.2);
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--accent-dark);outline-offset:2px;
+}
+.heart{
+  position:fixed;z-index:0;pointer-events:none;color:var(--accent);
+  opacity:.18;animation:float 5s ease-in-out infinite;
+}
+.heart:nth-of-type(1){top:5%;left:3%;font-size:35px}
+.heart:nth-of-type(2){top:24%;right:2%;font-size:24px;animation-delay:1s}
+.heart:nth-of-type(3){bottom:12%;left:5%;font-size:30px;animation-delay:2s}
+.heart:nth-of-type(4){bottom:5%;right:9%;font-size:38px;animation-delay:3s}
+.heart:nth-of-type(5){top:12%;right:18%;font-size:19px}
+.heart:nth-of-type(6){bottom:35%;left:2%;font-size:22px;animation-delay:1s}
+.heart:nth-of-type(7){top:55%;right:4%;font-size:20px;animation-delay:2s}
+.heart:nth-of-type(8){top:80%;right:28%;font-size:18px;animation-delay:1s}
+.heart:nth-of-type(9){top:35%;left:8%;font-size:21px;animation-delay:3s}
+.heart:nth-of-type(10){top:4%;right:40%;font-size:17px;animation-delay:2s}
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(-7deg)}
+  50%{transform:translateY(-10px) rotate(7deg)}
+}
+.sidebar{
+  position:fixed;inset:0 0 0 auto;width:245px;padding:24px 16px;
+  overflow-y:auto;z-index:20;background:var(--paper);
+  border-left:1px solid var(--line);box-shadow:var(--shadow);
+}
+.brand{text-align:center;margin-bottom:24px}
+.brand-mark{
+  width:66px;height:66px;margin:auto;border-radius:50%;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--accent),#f3c7d4);
+  color:white;font-size:34px;
+}
+.brand h2{margin:8px 0 0;font-size:27px}
+.brand small{color:var(--muted)}
+.nav{display:flex;flex-direction:column;gap:7px}
+.nav button{
+  border:0;text-align:right;padding:11px 13px;border-radius:13px;
+  background:transparent;color:var(--ink);
+}
+.nav button:hover,.nav button.active{
+  background:#d989a022;color:var(--accent-dark);
+}
+.content{position:relative;z-index:1;margin-right:245px;padding:30px;min-height:100vh}
+.mobile-bar{display:none}
+.page{display:none;max-width:1100px;margin:auto}
+.page.active{display:block;animation:appear .25s ease}
+@keyframes appear{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:none}
+}
+.page-title{font-size:43px;color:var(--accent-dark);margin:0 0 4px}
+.subtitle{color:var(--muted);margin:0 0 22px}
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:22px;
+  padding:22px;margin-bottom:18px;box-shadow:var(--shadow);
+}
+.card h2{margin:0 0 12px;font-size:29px}
+.grid{display:grid;gap:14px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+input,textarea,select{
+  width:100%;color:var(--ink);background:var(--cream);
+  border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+}
+textarea{min-height:100px;resize:vertical}
+.btn{
+  border:0;border-radius:12px;padding:9px 16px;
+  background:var(--accent);color:white;
+}
+.btn:hover{background:var(--accent-dark)}
+.btn.soft{background:#d989a022;color:var(--accent-dark)}
+.btn.remove{background:#bd7070}
+.btn.small{padding:5px 10px;font-size:16px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.cover{min-height:calc(100vh - 60px);display:grid;place-items:center}
+.cover-card{
+  width:min(760px,100%);padding:65px 28px;border-radius:32px;
+  background:var(--paper);border:1px solid var(--line);
+  box-shadow:var(--shadow);text-align:center;position:relative;overflow:hidden;
+}
+.cover-card:before,.cover-card:after{
+  content:"♥  ♡  ♥";position:absolute;color:var(--accent);
+  opacity:.2;font-size:42px;letter-spacing:8px;
+}
+.cover-card:before{top:10px;right:12px}
+.cover-card:after{bottom:8px;left:12px}
+.cover-heart{color:var(--accent);font-size:65px;line-height:1.2}
+.cover-title{color:var(--accent-dark);font-size:clamp(42px,7vw,68px);margin:8px 0}
+.cover-name{color:var(--muted);font-size:25px}
+
+/* مربعات الأهداف */
+.goal-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:13px;
+  margin-top:18px;
+}
+.goal-card{
+  min-width:0;display:flex;flex-direction:column;gap:13px;
+  padding:16px;border:1px solid var(--line);border-radius:17px;
+  background:var(--cream);transition:transform .18s,border-color .18s;
+}
+.goal-card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.goal-card.done{border-color:#75b68d;background:#e7f6eb}
+body.dark .goal-card.done{background:#294234}
+.goal-card.done .goal-text{text-decoration:line-through;opacity:.7}
+.goal-text{
+  overflow-wrap:anywhere;white-space:pre-wrap;
+  font-size:20px;flex:1;min-height:48px;
+}
+.goal-card-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;padding-top:10px;border-top:1px solid var(--line);
+}
+.goal-check{
+  display:flex;align-items:center;gap:6px;color:var(--muted);font-size:15px;
+}
+.goal-check input{width:19px;height:19px;accent-color:var(--accent);cursor:pointer}
+.status-buttons{display:flex;gap:6px}
+.status-btn{
+  min-width:39px;min-height:35px;border:1px solid var(--line);
+  border-radius:10px;background:var(--paper);color:var(--ink);padding:4px 9px;
+}
+.status-btn.yes{color:#28784b}
+.status-btn.no{color:#b63e52}
+.status-btn.selected.yes{background:#d9f2e2;border-color:#62a97e;box-shadow:0 0 0 1px #62a97e}
+.status-btn.selected.no{background:#ffe0e5;border-color:#d9899a;box-shadow:0 0 0 1px #d9899a}
+.item{display:flex;align-items:center;gap:10px;padding:12px;margin:9px 0;border:1px solid var(--line);border-radius:14px;background:var(--cream)}
+.item-text{flex:1;overflow-wrap:anywhere}
+.days-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.day-card{
+  border:1px solid var(--line);background:var(--cream);border-radius:13px;
+  text-align:center;padding:12px 4px;cursor:pointer;color:var(--ink);
+}
+.day-card.active{background:var(--accent);color:white;border-color:var(--accent-dark)}
+.day-card small{display:block;font-size:13px}
+.table-wrap{overflow-x:auto}
+.prayer-table{width:100%;border-collapse:collapse;min-width:680px}
+.prayer-table th,.prayer-table td{border:1px solid var(--line);padding:8px;text-align:center}
+.prayer-table th{background:#d989a022}
+.prayer-table td:first-child{min-width:90px}
+.prayer-state{display:flex;justify-content:center;gap:4px;flex-wrap:wrap}
+.period-label{color:var(--accent-dark);font-size:15px}
+.empty{color:var(--muted);padding:12px 0}
+.notice{color:var(--muted);font-size:16px}
+.entry-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}
+.entry-hint{color:var(--muted);font-size:15px;margin:8px 0 0}
+@media(max-width:850px){
+  .sidebar{transform:translateX(100%);transition:transform .25s}
+  .sidebar.open{transform:translateX(0)}
+  .content{margin-right:0;padding:16px}
+  .mobile-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .mobile-bar button{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 12px;color:var(--ink)}
+}
+@media(max-width:550px){
+  .grid.two{grid-template-columns:1fr}
+  .page-title{font-size:35px}
+  .card{padding:16px}
+  .days-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cover-card{padding:50px 18px}
+  .entry-row{grid-template-columns:1fr}
+  .goal-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div class="heart">♥</div><div class="heart">♥</div>
+<div class="heart">♥</div><div class="heart">♥</div>
+<div class="heart">♥</div><div class="heart">♥</div>
+<div class="heart">♥</div><div class="heart">♥</div>
+<div class="heart">♥</div><div class="heart">♥</div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="brand-mark">♥</div>
+    <h2>مخطط أهدافي</h2>
+    <small>رحلتي نحو الأفضل</small>
+  </div>
+  <nav class="nav">
+    <button data-page="home" class="active">الغلاف</button>
+    <button data-page="annual">أهدافي السنوية</button>
+    <button data-page="monthly">أهداف الأشهر</button>
+    <button data-page="cycle">أهداف 10 أيام</button>
+    <button data-page="prayers">متابعة الصلاة</button>
+    <button data-page="quran">خطة القرآن</button>
+    <button data-page="appearance">المظهر</button>
+  </nav>
+</aside>
+
+<main class="content">
+  <div class="mobile-bar">
+    <button onclick="toggleSidebar()">☰ القائمة</button>
+    <strong>مخطط أهدافي ♥</strong>
+  </div>
+
+  <section class="page active" id="page-home">
+    <div class="cover">
+      <div class="cover-card">
+        <div class="cover-heart">♥ ♡ ♥</div>
+        <div class="cover-name" id="coverName">رحلتي تبدأ من هنا</div>
+        <h1 class="cover-title">مخطط أهدافي</h1>
+        <p class="subtitle">خطوات بسيطة، وأيام مليئة بالإنجاز.</p>
+        <button class="btn" onclick="showPage('annual')">ابدئي رحلتك</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="page-annual">
+    <h1 class="page-title">أهدافي السنوية</h1>
+    <p class="subtitle">اكتبي أهداف السنة، وكل هدف عنده مربع خاص به.</p>
+    <div class="card">
+      <div class="entry-row">
+        <input id="annualInput" placeholder="اكتبي هدفك السنوي ثم اضغطي Enter">
+        <button class="btn" onclick="addAnnual()">＋ إضافة هدف</button>
+      </div>
+      <p class="entry-hint">اضغطي Enter بعد كتابة الهدف لإضافته مباشرة.</p>
+    </div>
+    <div class="card"><div id="annualList"></div></div>
+  </section>
+
+  <section class="page" id="page-monthly">
+    <h1 class="page-title">أهداف الأشهر</h1>
+    <p class="subtitle">كل شهر عنده أهدافه الخاصة.</p>
+    <div class="card">
+      <label for="monthlyMonth">اختاري الشهر</label>
+      <input type="month" id="monthlyMonth">
+    </div>
+    <div class="card">
+      <h2 id="monthlyHeading">أهداف الشهر</h2>
+      <div class="entry-row">
+        <input id="monthlyInput" placeholder="اكتبي هدف الشهر ثم اضغطي Enter">
+        <button class="btn" onclick="addMonthly()">＋ إضافة هدف</button>
+      </div>
+      <p class="entry-hint">اضغطي Enter لإضافة الهدف مباشرة.</p>
+      <div id="monthlyList"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-cycle">
+    <h1 class="page-title">أهداف 10 أيام</h1>
+    <p class="subtitle">حددي أهداف الدورة وتابعي الأيام التي أنجزتِ فيها خطتك.</p>
+    <div class="card">
+      <label for="cycleStart">بداية دورة العشرة أيام</label>
+      <input type="date" id="cycleStart">
+      <p class="notice">تغيير تاريخ البداية يغيّر التواريخ الظاهرة فقط.</p>
+    </div>
+    <div class="card">
+      <h2>أهدافي لهذه الدورة</h2>
+      <div class="entry-row">
+        <input id="cycleGoalInput" placeholder="اكتبي الهدف ثم اضغطي Enter">
+        <button class="btn" onclick="addCycleGoal()">＋ إضافة هدف</button>
+      </div>
+      <p class="entry-hint">اضغطي Enter لإضافة الهدف مباشرة.</p>
+      <div id="cycleGoalsList"></div>
+    </div>
+    <div class="card">
+      <h2>متابعة الأيام</h2>
+      <p class="notice">اضغطي على اليوم لوضع علامة متابعة، واضغطي مرة أخرى لإلغائها.</p>
+      <div class="days-grid" id="cycleDays"></div>
+    </div>
+  </section>
+
+  <section class="page" id="page-prayers">
+    <h1 class="page-title">متابعة الصلاة</h1>
+    <p class="subtitle">اختاري ✓ أو ✗، وكل مرة تختاري علامة تتبدل العلامة السابقة وحدها.</p>
+    <div class="card">
+      <div class="table-wrap">
+        <table class="prayer-table">
+          <thead>
+            <tr><th>اليوم</th><th>الفجر</th><th>الظهر</th><th>العصر</th><th>المغرب</th><th>العشاء</th></tr>
+          </thead>
+          <tbody id="prayerBody"></tbody>
+        </table>
+      </div>
+      <p class="notice">✓ تمّت الصلاة · ✗ لم تتم · «حائض» يعلّم اليوم كاملًا بهذه الحالة.</p>
+    </div>
+  </section>
+
+  <section class="page" id="page-quran">
+    <h1 class="page-title">خطة القرآن</h1>
+    <p class="subtitle">اكتبي ما تريدين حفظه ومراجعته خلال كل دورة من 10 أيام.</p>
+    <div class="card">
+      <h2>الحفظ خلال 10 أيام</h2>
+      <label for="quranMemorize">ما يجب حفظه</label>
+      <textarea id="quranMemorize" placeholder="السورة، الآيات، أو المقدار المطلوب حفظه..."></textarea>
+    </div>
+    <div class="card">
+      <h2>المراجعة خلال 10 أيام</h2>
+      <label for="quranReview">ما يجب مراجعته</label>
+      <textarea id="quranReview" placeholder="السور والآيات التي تريدين مراجعتها..."></textarea>
+    </div>
+    <div class="card">
+      <h2>متابعة القرآن</h2>
+      <label class="item" style="cursor:pointer">
+        <input type="checkbox" id="quranMemorizeDone" style="width:20px">
+        <span class="item-text">أنجزتُ الحفظ المخطط له</span>
+      </label>
+      <label class="item" style="cursor:pointer">
+        <input type="checkbox" id="quranReviewDone" style="width:20px">
+        <span class="item-text">أنجزتُ المراجعة المخطط لها</span>
+      </label>
+    </div>
+  </section>
+
+  <section class="page" id="page-appearance">
+    <h1 class="page-title">المظهر</h1>
+    <p class="subtitle">اختاري اللون الذي تحبينه.</p>
+    <div class="card">
+      <h2>لون المخطط</h2>
+      <div class="actions">
+        <button class="btn" onclick="setAccent('#d989a0')">وردي</button>
+        <button class="btn" onclick="setAccent('#c99a6b')">بيج</button>
+        <button class="btn" onclick="setAccent('#8da8a0')">أخضر</button>
+        <button class="btn" onclick="setAccent('#9b8fc4')">بنفسجي</button>
+      </div>
+    </div>
+    <div class="card">
+      <label for="userName">الاسم الذي يظهر على الغلاف</label>
+      <input id="userName" placeholder="اكتبي اسمك">
+      <br><br>
+      <div class="actions">
+        <button class="btn soft" onclick="toggleDark()">تبديل الوضع الليلي</button>
+        <button class="btn soft" onclick="exportData()">تصدير نسخة احتياطية</button>
+        <button class="btn soft" onclick="document.getElementById('importFile').click()">استرجاع نسخة</button>
+        <input id="importFile" type="file" accept="application/json,.json" hidden onchange="importData(event)">
+      </div>
+      <p class="notice">صدّري نسخة احتياطية للاحتفاظ ببياناتك عند تغيير الجهاز أو المتصفح.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+const KEY="myGoalPlannerTenDaysV1";
+const OLD_KEY="myGoalPlannerArabicV5";
+const prayerNames=["الفجر","الظهر","العصر","المغرب","العشاء"];
+const STORAGE_DAYS=10;
+
+function localDateString(date){
+  const y=date.getFullYear();
+  const m=String(date.getMonth()+1).padStart(2,"0");
+  const d=String(date.getDate()).padStart(2,"0");
+  return `${y}-${m}-${d}`;
+}
+
+function freshData(){
+  return {
+    name:"",annual:[],monthly:[],
+    selectedMonth:localDateString(new Date()).slice(0,7),
+    cycleStart:localDateString(new Date()),
+    cycleGoals:[],trackedDays:[],
+    prayers:Array.from({length:10},()=>({period:false,states:Array(5).fill("")})),
+    quran:{memorize:"",review:"",memorizeDone:false,reviewDone:false},
+    appearance:{accent:"#d989a0",dark:false}
+  };
+}
+
+function normalizeGoal(g){
+  if(typeof g==="string") return {id:makeId(),text:g,status:""};
+  return {
+    ...g,id:g.id||makeId(),text:String(g.text||""),
+    status:g.status||((g.done)?"done":"")
+  };
+}
+
+function loadData(){
+  try{
+    const saved=localStorage.getItem(KEY);
+    if(saved){
+      const d={...freshData(),...JSON.parse(saved)};
+      const defaults=freshData();
+      d.quran={...defaults.quran,...(d.quran||{})};
+      d.appearance={...defaults.appearance,...(d.appearance||{})};
+      d.annual=(Array.isArray(d.annual)?d.annual:[]).map(normalizeGoal);
+      d.monthly=(Array.isArray(d.monthly)?d.monthly:[]).map(g=>({
+        ...normalizeGoal(g),month:g.month||d.selectedMonth||defaults.selectedMonth
+      }));
+      d.cycleGoals=(Array.isArray(d.cycleGoals)?d.cycleGoals:[]).map(normalizeGoal);
+      d.trackedDays=Array.isArray(d.trackedDays)?d.trackedDays:[];
+      const oldPrayers=Array.isArray(d.prayers)?d.prayers:[];
+      d.prayers=Array.from({length:10},(_,i)=>{
+        const row=oldPrayers[i]||{};
+        return {
+          period:!!row.period,
+          states:Array.from({length:5},(_,j)=>{
+            const s=(row.states||[])[j]||"";
+            return s==="done"||s==="missed"?s:"";
+          })
+        };
+      });
+      d.prayers=d.prayers.map(row=>row.period
+        ?{period:true,states:Array(5).fill("")}:row);
+      return d;
+    }
+
+    const d=freshData();
+    const old=localStorage.getItem(OLD_KEY);
+    if(old){
+      const previous=JSON.parse(old);
+      if(Array.isArray(previous.annual)) d.annual=previous.annual.map(normalizeGoal);
+      if(previous.name) d.name=previous.name;
+      if(previous.appearance) d.appearance={...d.appearance,...previous.appearance};
+    }
+    return d;
+  }catch{return freshData()}
+}
+
+let data=loadData();
+
+function save(){
+  try{localStorage.setItem(KEY,JSON.stringify(data))}
+  catch{alert("تعذّر حفظ البيانات. صدّري نسخة احتياطية للاحتفاظ بها.")}
+}
+
+function esc(value){
+  return String(value??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
+}
+
+function makeId(){
+  return Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+}
+
+function showPage(name){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  const target=document.getElementById("page-"+name);
+  if(target) target.classList.add("active");
+  document.querySelectorAll("[data-page]").forEach(b=>{
+    b.classList.toggle("active",b.dataset.page===name);
+  });
+  document.getElementById("sidebar").classList.remove("open");
+  if(name==="annual") renderAnnual();
+  if(name==="monthly") renderMonthly();
+  if(name==="cycle") renderCycle();
+  if(name==="prayers") renderPrayers();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.querySelectorAll("[data-page]").forEach(b=>{
+  b.addEventListener("click",()=>showPage(b.dataset.page));
+});
+
+function toggleSidebar(){
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+/* الضغط على Enter يضيف الهدف */
+function bindEnter(inputId,addFunction){
+  const input=document.getElementById(inputId);
+  input.addEventListener("keydown",event=>{
+    if(event.key==="Enter"){
+      event.preventDefault();
+      addFunction();
+    }
+  });
+}
+
+/* مربعات الأهداف */
+function goalCard(g,type){
+  const status=g.status||"";
+  const done=status==="done";
+  const missed=status==="missed";
+  const statusButtons=`
+    <div class="status-buttons">
+      <button type="button" class="status-btn yes ${done?"selected":""}"
+        aria-label="تم الإنجاز" aria-pressed="${done}"
+        onclick="setGoalStatus('${type}','${g.id}','done')">✓</button>
+      <button type="button" class="status-btn no ${missed?"selected":""}"
+        aria-label="لم يتم الإنجاز" aria-pressed="${missed}"
+        onclick="setGoalStatus('${type}','${g.id}','missed')">✗</button>
+    </div>`;
+  return `
+    <article class="goal-card ${done?"done":""}">
+      <div class="goal-text">${esc(g.text)}</div>
+      <div class="goal-card-footer">
+        ${statusButtons}
+        <button type="button" class="btn remove small"
+          onclick="deleteGoal('${type}','${g.id}')">حذف</button>
+      </div>
+    </article>`;
+}
+
+function renderGoalGrid(elementId,goals,type,emptyMessage){
+  const list=document.getElementById(elementId);
+  if(!goals.length){
+    list.innerHTML=`<p class="empty">${emptyMessage}</p>`;
+    return;
+  }
+  list.innerHTML=`<div class="goal-grid">${goals.map(g=>goalCard(g,type)).join("")}</div>`;
+}
+
+function addAnnual(){
+  const input=document.getElementById("annualInput");
+  const text=input.value.trim();
+  if(!text){input.focus();return}
+  data.annual.push({id:makeId(),text,status:""});
+  input.value="";
+  save();
+  renderAnnual();
+  input.focus();
+}
+
+function renderAnnual(){
+  renderGoalGrid("annualList",data.annual,"annual","أضيفي أول هدف سنوي لكِ.");
+}
+
+function addMonthly(){
+  const input=document.getElementById("monthlyInput");
+  const text=input.value.trim();
+  const month=document.getElementById("monthlyMonth").value;
+  if(!month){alert("اختاري الشهر أولًا.");return}
+  if(!text){input.focus();return}
+  data.monthly.push({id:makeId(),month,text,status:""});
+  data.selectedMonth=month;
+  input.value="";
+  save();
+  renderMonthly();
+  input.focus();
+}
+
+function renderMonthly(){
+  const monthInput=document.getElementById("monthlyMonth");
+  if(!monthInput.value) monthInput.value=data.selectedMonth||localDateString(new Date()).slice(0,7);
+  const month=monthInput.value;
+  data.selectedMonth=month;
+  document.getElementById("monthlyHeading").textContent=month?"أهداف شهر "+month:"أهداف الشهر";
+  renderGoalGrid("monthlyList",data.monthly.filter(g=>g.month===month),"monthly","مازال ما ضفتي حتى هدف لهذا الشهر.");
+  save();
+}
+
+document.getElementById("monthlyMonth").addEventListener("change",()=>{
+  data.selectedMonth=document.getElementById("monthlyMonth").value;
+  save();
+  renderMonthly();
+});
+
+function addCycleGoal(){
+  const input=document.getElementById("cycleGoalInput");
+  const text=input.value.trim();
+  if(!text){input.focus();return}
+  data.cycleGoals.push({id:makeId(),text,status:""});
+  input.value="";
+  save();
+  renderCycle();
+  input.focus();
+}
+
+function renderCycle(){
+  document.getElementById("cycleStart").value=data.cycleStart||"";
+  renderGoalGrid("cycleGoalsList",data.cycleGoals,"cycle","أضيفي أهدافك لهذه الدورة.");
+
+  const days=document.getElementById("cycleDays");
+  const start=data.cycleStart?new Date(data.cycleStart+"T12:00:00"):new Date();
+  days.innerHTML=Array.from({length:STORAGE_DAYS},(_,i)=>{
+    const date=new Date(start);
+    date.setDate(date.getDate()+i);
+    const checked=data.trackedDays.includes(i);
+    return `<button type="button" class="day-card ${checked?"active":""}"
+      aria-pressed="${checked}" onclick="toggleTrackedDay(${i})">
+      <strong>اليوم ${i+1}</strong>
+      <small>${localDateString(date)}</small>
+      <small>${checked?"✓ تمت المتابعة":"اضغطي للمتابعة"}</small>
+    </button>`;
+  }).join("");
+}
+
+function setGoalStatus(type,id,status){
+  let list;
+  if(type==="annual") list=data.annual;
+  else if(type==="monthly") list=data.monthly;
+  else list=data.cycleGoals;
+  const goal=list.find(g=>g.id===id);
+  if(!goal)return;
+  goal.status=status;
+  goal.done=status==="done";
+  save();
+  if(type==="annual") renderAnnual();
+  if(type==="monthly") renderMonthly();
+  if(type==="cycle") renderCycle();
+}
+
+function deleteGoal(type,id){
+  if(type==="annual") data.annual=data.annual.filter(g=>g.id!==id);
+  if(type==="monthly") data.monthly=data.monthly.filter(g=>g.id!==id);
+  if(type==="cycle") data.cycleGoals=data.cycleGoals.filter(g=>g.id!==id);
+  save();
+  if(type==="annual") renderAnnual();
+  if(type==="monthly") renderMonthly();
+  if(type==="cycle") renderCycle();
+}
+
+function toggleTrackedDay(day){
+  if(data.trackedDays.includes(day)){
+    data.trackedDays=data.trackedDays.filter(d=>d!==day);
+  }else data.trackedDays.push(day);
+  save();
+  renderCycle();
+}
+
+document.getElementById("cycleStart").addEventListener("change",e=>{
+  data.cycleStart=e.target.value;
+  save();
+  renderCycle();
+  renderPrayers();
+});
+
+/* الصلاة: كل صلاة عندها اختيار واحد فقط */
+function setPrayer(day,prayer,status){
+  const row=data.prayers[day];
+  if(!row||row.period)return;
+  row.states[prayer]=status;
+  save();
+  renderPrayers();
+}
+
+function togglePeriod(day){
+  const row=data.prayers[day];
+  if(!row)return;
+  row.period=!row.period;
+  row.states=Array(5).fill("");
+  save();
+  renderPrayers();
+}
+
+function renderPrayers(){
+  const body=document.getElementById("prayerBody");
+  body.innerHTML=data.prayers.map((row,day)=>{
+    const start=data.cycleStart?new Date(data.cycleStart+"T12:00:00"):new Date();
+    start.setDate(start.getDate()+day);
+    const label=`اليوم ${day+1}<br><small>${localDateString(start)}</small>`;
+    const cells=prayerNames.map((name,p)=>{
+      if(row.period)return `<td><span class="period-label">حائض</span></td>`;
+      const status=row.states[p]||"";
+      const yes=status==="done";
+      const no=status==="missed";
+      return `<td><div class="prayer-state">
+        <button type="button" class="status-btn yes ${yes?"selected":""}"
+          aria-label="${name}: تم" aria-pressed="${yes}"
+          onclick="setPrayer(${day},${p},'done')">✓</button>
+        <button type="button" class="status-btn no ${no?"selected":""}"
+          aria-label="${name}: لم تتم" aria-pressed="${no}"
+          onclick="setPrayer(${day},${p},'missed')">✗</button>
+      </div></td>`;
+    }).join("");
+    return `<tr>
+      <td>${label}<br>
+        <button type="button" class="btn soft small" style="margin-top:5px"
+          onclick="togglePeriod(${day})">${row.period?"إلغاء حائض":"حائض"}</button>
+      </td>${cells}
+    </tr>`;
+  }).join("");
+}
+
+/* القرآن */
+function bindQuran(){
+  [["quranMemorize","memorize"],["quranReview","review"]].forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    el.value=data.quran[key]||"";
+    el.addEventListener("input",()=>{
+      data.quran[key]=el.value;
+      save();
+    });
+  });
+  [["quranMemorizeDone","memorizeDone"],["quranReviewDone","reviewDone"]].forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    el.checked=!!data.quran[key];
+    el.addEventListener("change",()=>{
+      data.quran[key]=el.checked;
+      save();
+    });
+  });
+}
+
+/* المظهر */
+function setAccent(color){
+  data.appearance.accent=color;
+  applyAppearance();
+  save();
+}
+function toggleDark(){
+  data.appearance.dark=!data.appearance.dark;
+  applyAppearance();
+  save();
+}
+function applyAppearance(){
+  const accent=data.appearance.accent||"#d989a0";
+  document.documentElement.style.setProperty("--accent",accent);
+  const darker={
+    "#d989a0":"#b96780",
+    "#c99a6b":"#9f744a",
+    "#8da8a0":"#617f76",
+    "#9b8fc4":"#7567a0"
+  };
+  document.documentElement.style.setProperty("--accent-dark",darker[accent]||accent);
+  document.body.classList.toggle("dark",!!data.appearance.dark);
+  document.getElementById("userName").value=data.name||"";
+  document.getElementById("coverName").textContent=data.name?"رحلة "+data.name:"رحلتي تبدأ من هنا";
+}
+
+document.getElementById("userName").addEventListener("input",e=>{
+  data.name=e.target.value;
+  document.getElementById("coverName").textContent=data.name?"رحلة "+data.name:"رحلتي تبدأ من هنا";
+  save();
+});
+
+/* النسخة الاحتياطية */
+function exportData(){
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="نسخة-مخطط-أهدافي.json";
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function importData(event){
+  const file=event.target.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const imported=JSON.parse(reader.result);
+      if(!imported||typeof imported!=="object"||Array.isArray(imported))throw new Error("invalid");
+      const defaults=freshData();
+      data={...defaults,...imported};
+      data.annual=(Array.isArray(data.annual)?data.annual:[]).map(normalizeGoal);
+      data.monthly=(Array.isArray(data.monthly)?data.monthly:[]).map(g=>({
+        ...normalizeGoal(g),month:g.month||data.selectedMonth||defaults.selectedMonth
+      }));
+      data.cycleGoals=(Array.isArray(data.cycleGoals)?data.cycleGoals:[]).map(normalizeGoal);
+      data.trackedDays=Array.isArray(data.trackedDays)?data.trackedDays:[];
+      data.quran={...defaults.quran,...(data.quran||{})};
+      data.appearance={...defaults.appearance,...(data.appearance||{})};
+      const importedPrayers=Array.isArray(data.prayers)?data.prayers:[];
+      data.prayers=Array.from({length:10},(_,i)=>{
+        const row=importedPrayers[i]||{};
+        return {
+          period:!!row.period,
+          states:Array.from({length:5},(_,j)=>{
+            const s=(row.states||[])[j];
+            return s==="done"||s==="missed"?s:"";
+          })
+        };
+      }).map(row=>row.period?{period:true,states:Array(5).fill("")}:row);
+      save();
+      location.reload();
+    }catch{
+      alert("الملف غير صالح. اختاري نسخة احتياطية من مخطط أهدافي.");
+    }
+  };
+  reader.readAsText(file);
+  event.target.value="";
+}
+
+/* تشغيل المخطط */
+bindEnter("annualInput",addAnnual);
+bindEnter("monthlyInput",addMonthly);
+bindEnter("cycleGoalInput",addCycleGoal);
+applyAppearance();
+bindQuran();
+
+document.getElementById("monthlyMonth").value=
+  data.selectedMonth||localDateString(new Date()).slice(0,7);
+
+renderAnnual();
+renderMonthly();
+renderCycle();
+renderPrayers();
+showPage("home");
+</script>
+</body>
+</html>
